@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الملاحظات - مساحة الكاتب</title>
+    <!-- ربط ملف الستايل الخارجي -->
+    <link rel="stylesheet" href="writer-style.css">
+</head>
+<body>
+
+    <div class="container">
+        <form class="add-form" onsubmit="addTitle(event)">
+            <input type="text" id="newTitleInput" placeholder="اكتب عنواناً جديداً هنا...">
+            <button type="submit" class="btn-check" title="إضافة">✓</button>
+        </form>
+
+        <ul class="titles-list" id="titlesList"></ul>
+    </div>
+
+    <!-- المحرر -->
+    <div class="editor-modal" id="editorModal">
+        <div class="editor-header">
+            <button class="back-btn-arrow" onclick="closeEditor()" title="رجوع">➜</button>
+            <h2 id="modalTitle" style="font-size: 18px;">عنوان الملاحظة</h2>
+            <div style="width: 36px;"></div>
+        </div>
+        
+        <div class="editor-toolbar">
+            <button type="button" class="tool-btn" onclick="execCmd('undo')" title="تراجع">↶</button>
+            <button type="button" class="tool-btn" onclick="execCmd('redo')" title="إعادة">↷</button>
+            <span style="color:#ccc;">|</span>
+            <button type="button" class="tool-btn" onclick="triggerFileInput('image/*')" title="صورة">🖼️</button>
+            <button type="button" class="tool-btn" onclick="triggerFileInput('video/*')" title="فيديو">🎥</button>
+            <button type="button" class="tool-btn" onclick="triggerFileInput('audio/*')" title="موسيقى/صوت">🎵</button>
+            <button type="button" class="tool-btn" id="micBtn" onclick="toggleAudioRecording()" title="تسجيل صوت">🎤</button>
+            <button type="button" class="tool-btn" onclick="addYoutubeVideo()" title="يوتيوب">▶️</button>
+            <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
+        </div>
+
+        <div class="editor-content" id="editorContent" contenteditable="true" oninput="autoSaveContent()"></div>
+    </div>
+
+    <!-- نافذة تأكيد الحذف -->
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-box">
+            <p id="confirmText">هل أنت متأكد؟</p>
+            <div class="confirm-btns">
+                <button type="button" class="btn-yes" onclick="confirmAction(true)">نعم</button>
+                <button type="button" class="btn-no" onclick="confirmAction(false)">لا</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ربط ملف الجافاسكريبت الخارجي -->
+    <script src="writer-engine.js"></script>
+</body>
+      </html>
 
