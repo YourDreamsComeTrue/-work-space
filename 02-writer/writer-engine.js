@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // استخراج معرف القصة من الرابط (الافتراضي 00000001)
     const urlParams = new URLSearchParams(window.location.search);
     const storyId = urlParams.get('id') || '00000001';
 
-    // مسار ملف القصة الديناميكي
     const scriptPath = `stories/story-${storyId}.js`;
-
     const script = document.createElement('script');
     script.src = scriptPath;
 
@@ -16,25 +13,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const contentContainer = document.getElementById('story-content');
             contentContainer.innerHTML = "";
 
-            // توزيع النص داخل فقرات ليتناسب مع شكل الكتاب
+            let allParagraphs = [];
             if (Array.isArray(storyData.pages)) {
-                storyData.pages.forEach(pageText => {
-                    let p = document.createElement('p');
-                    p.innerHTML = pageText.replace(/\n/g, '<br>');
-                    contentContainer.appendChild(p);
-                });
+                allParagraphs = storyData.pages;
             } else if (storyData.content) {
-                let p = document.createElement('p');
-                p.innerHTML = storyData.content.replace(/\n/g, '<br>');
-                contentContainer.appendChild(p);
+                allParagraphs = [storyData.content];
             }
+
+            // دمج النص ككتلة واحدة متصلة مع دعم الأسطر والفقرات
+            allParagraphs.forEach(text => {
+                let p = document.createElement('p');
+                p.innerHTML = text.replace(/\n/g, '<br>');
+                contentContainer.appendChild(p);
+            });
+
         } else {
             showError("ملف القصة فارغ أو غير متوافق.");
         }
     };
 
     script.onerror = function() {
-        showError(`عذراً، لم يتم العثور على القصة رقم (${storyId}) في مجلد stories.`);
+        showError(`عذراً، لم يتم العثور على القصة رقم (${storyId})`);
     };
 
     document.head.appendChild(script);
@@ -44,4 +43,3 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('story-content').innerHTML = `<p style="color: #990000; text-align: center;">${msg}</p>`;
     }
 });
-
