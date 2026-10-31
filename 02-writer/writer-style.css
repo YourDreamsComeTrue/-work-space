@@ -5,38 +5,53 @@
     font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* تثبيت الشاشة ومنع أي تمرير خارج نطاق الكتاب */
 html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #1a120b; /* لون خلفية دافئ يحيط بالصورة */
+    background-color: #0d0907;
 }
 
-/* خلفية المشهد: عرض الصورة كاملة دون قص أو تشويه في المنتصف */
+/* تنسيق المشهد: استخدام حاوية فليكس لمركزة الصورة والكتاب بدقة تامة */
 .scene-background {
     width: 100vw;
     height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('assets/images/snow.png');
-    background-size: contain; /* إظهار الصورة كاملة ومحتواة في الشاشة */
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #0d0907;
     position: relative;
+    overflow: hidden;
 }
 
-/* حاوية الكتاب: مطابقة لمساحة الأوراق في الصورة بدقة تامة */
+/* جعل صورة الخلفية تتكيف مع الشاشة بشكل متناسق ومثالي (تظهر كاملة دون تشويه) */
+.scene-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/images/snow.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+/* حاوية الكتاب: تعتمد على نظام النسبة المئوية لتموضع دقيق وثابت فوق أوراق الكتاب في الصورة */
 .magic-book-overlay {
-    width: 70vw;
-    max-width: 620px;
-    height: 48vh;
-    max-height: 380px;
+    width: 68vw;
+    max-width: 580px;
+    height: 44vh;
+    max-height: 350px;
     display: flex;
     position: absolute;
-    top: 61.5%; /* التموضع الدقيق فوق صفحات الكتاب */
+    top: 61.5%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2; /* لتكون فوق الخلفية مباشرة وتستقبل التفاعل */
 }
 
 /* حاوية الصفحة الواحدة */
@@ -48,23 +63,23 @@ html, body {
     flex-direction: column;
 }
 
-/* صندوق التمرير: مرن جداً ويسمح بالسحب للأعلى والأسفل بسلاسة */
+/* صندوق التمرير: مرن جداً ويسمح بالسحب للأعلى والأسفل بسلاسة تامة */
 .page-scroll-box {
     width: 100%;
     height: 100%;
-    overflow-y: scroll !important; /* ضمان عمل التمرير على الهواتف */
+    overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
     padding-left: 5px;
     padding-right: 5px;
-    scrollbar-width: thin; /* إظهار مؤشر تمرير رفيع لسهولة السحب */
+    scrollbar-width: thin;
 }
 
-/* تخصيص مظهر شريط التمرير ليكون أنيقاً ومتناسقاً مع الكتاب */
+/* تخصيص مظهر شريط التمرير */
 .page-scroll-box::-webkit-scrollbar {
     width: 4px;
 }
 .page-scroll-box::-webkit-scrollbar-thumb {
-    background: rgba(139, 107, 71, 0.4);
+    background: rgba(139, 107, 71, 0.5);
     border-radius: 4px;
 }
 
@@ -79,7 +94,7 @@ html, body {
     padding-bottom: 3px;
 }
 
-/* تنسيق النص ليملأ مساحة الكتاب بشكل مريح للقراءة */
+/* تنسيق النص داخل أوراق الكتاب */
 .story-text p {
     font-size: 0.85rem;
     line-height: 1.6;
@@ -89,14 +104,11 @@ html, body {
     font-weight: 500;
 }
 
-/* التجاوب الدقيق مع مختلف شاشات الهواتف المحمولة */
+/* التجاوب مع شاشات الهواتف المحمولة المختلفة */
 @media (max-width: 768px) {
-    .scene-background {
-        background-size: cover; /* في الهواتف الضيقة جداً تملأ العرض بالكامل لضمان الوضوح */
-    }
     .magic-book-overlay {
-        width: 82vw;
-        height: 46vh;
+        width: 80vw;
+        height: 44vh;
         top: 61.5%;
     }
     .single-page-container {
@@ -106,4 +118,4 @@ html, body {
         font-size: 0.8rem;
         line-height: 1.5;
     }
-}
+    }
