@@ -12,7 +12,7 @@ html, body {
     background-color: #000;
 }
 
-/* خلفية المشهد باستخدام الصورة من المسار المحدد */
+/* خلفية المشهد (صورة الثلج والمدفأة) */
 .scene-background {
     width: 100vw;
     height: 100dvh;
@@ -26,81 +26,71 @@ html, body {
     position: relative;
 }
 
-/* حاوية النص المطبقة بدقة فوق مساحة الكتاب في الصورة */
+/* حاوية الكتاب المطابقة لمساحة الأوراق المفتوحة في الصورة بدقة */
 .magic-book-overlay {
-    width: 82vw;
-    max-width: 850px;
-    height: 65vh;
-    max-height: 520px;
+    width: 78vw;
+    max-width: 750px;
+    height: 62vh;
+    max-height: 480px;
     display: flex;
     position: absolute;
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none;
 }
 
-/* مساحة الصفحة الواحدة */
-.book-page-area {
-    flex: 1;
+/* حاوية الصفحة الواحدة المدمجة */
+.single-page-container {
+    width: 100%;
     height: 100%;
-    padding: 40px 30px 30px 30px;
+    padding: 30px 40px;
     display: flex;
     flex-direction: column;
-    pointer-events: auto;
 }
 
-/* حاوية التمرير داخل الصفحة */
+/* صندوق التمرير التلقائي (اصعد وانزل بالإصبع بحرية) */
 .page-scroll-box {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    padding-left: 5px;
-    padding-right: 5px;
-    scrollbar-width: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* إخفاء شريط التمرير للمظهر الجمالي */
 }
 .page-scroll-box::-webkit-scrollbar {
     display: none;
 }
 
-/* عنوان القصة */
+/* عنوان القصة داخل الكتاب */
 .book-title {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: #4a3319;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: 700;
     border-bottom: 1px solid rgba(139, 107, 71, 0.3);
-    padding-bottom: 4px;
+    padding-bottom: 6px;
 }
 
-/* تنسيق النصوص داخل الكتاب */
+/* تنسيق النص ليظهر كصفحة واحدة متصلة */
 .story-text p {
-    font-size: 0.95rem;
-    line-height: 1.9;
+    font-size: 1rem;
+    line-height: 2;
     color: #2c1d0c;
     text-align: justify;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: 500;
-}
-
-/* الفاصل في منتصف الكتاب */
-.book-gutter {
-    width: 45px;
-    height: 100%;
 }
 
 /* التجاوب مع الهواتف المحمولة */
 @media (max-width: 768px) {
     .magic-book-overlay {
-        width: 94vw;
-        height: 62vh;
+        width: 90vw;
+        height: 58vh;
         top: 50%;
     }
-    .book-page-area {
-        padding: 20px 10px;
+    .single-page-container {
+        padding: 20px 15px;
     }
-    .book-gutter {
-        width: 15px;
-    }
-    }
+}
