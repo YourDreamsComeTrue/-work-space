@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>قارئ الكتاب السحري</title>
+    <!-- ربط ملف التصميم -->
+    <link rel="stylesheet" href="writer-style.css">
+</head>
+<body>
+
+    <!-- الخلفية والأجواء العامة -->
+    <div class="scene-background">
+        
+        <!-- حاوية الكتاب المفتوح -->
+        <div class="book-container">
+            
+            <!-- الصفحة اليسرى (أو صفحة العرض المخصصة) -->
+            <div class="book-page left-page">
+                <div class="page-inner">
+                    <h2 id="story-title" class="book-title">جاري التحميل...</h2>
+                    <div id="story-content" class="story-text-container">
+                        <!-- النص يظهر هنا داخل حيز الكتاب -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- الفاصل الوسطي للكتاب (طية الورق) -->
+            <div class="book-spine"></div>
+
+            <!-- الصفحة اليمنى (اختيارية لتوزيع النص أو إعطاء مظهر متوازن) -->
+            <div class="book-page right-page">
+                <div class="page-inner decor-page">
+                    <div class="corner-ornament top-right"></div>
+                    <div class="corner-ornament bottom-left"></div>
+                    <div class="center-seal">📖</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ربط ملف المحرك البرمجي -->
+    <script src="writer-engine.js"></script>
+</body>
+</html>
 
