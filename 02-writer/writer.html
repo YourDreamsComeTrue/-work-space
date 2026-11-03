@@ -8,8 +8,16 @@
 </head>
 <body>
 
+    <!-- حاوية المشهد الكاملة -->
     <div class="scene-background">
-        <!-- حاوية الكتاب الموحدة التي تتطابق مع مساحة القراءة في الصورة -->
+        
+        <!-- خلفية الفيديو المتحرك -->
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="assets/images/snow.mp4" type="video/mp4">
+            متصفحك لا يدعم عرض الفيديو.
+        </video>
+
+        <!-- حاوية الكتاب الممتدة فوق الفيديو بدقة -->
         <div class="magic-book-overlay">
             <div class="single-page-container">
                 <div class="page-scroll-box">
@@ -18,6 +26,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="writer-engine.js"></script>
