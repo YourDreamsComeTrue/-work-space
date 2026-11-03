@@ -5,7 +5,6 @@
     font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* تثبيت الشاشة ومنع أي تمرير خارج نطاق الكتاب */
 html, body {
     width: 100%;
     height: 100%;
@@ -13,7 +12,7 @@ html, body {
     background-color: #0d0907;
 }
 
-/* تنسيق المشهد: استخدام حاوية فليكس لمركزة الصورة والكتاب بدقة تامة */
+/* تنسيق المشهد الرئيسي */
 .scene-background {
     width: 100vw;
     height: 100dvh;
@@ -25,22 +24,21 @@ html, body {
     overflow: hidden;
 }
 
-/* جعل صورة الخلفية تتكيف مع الشاشة بشكل متناسق ومثالي (تظهر كاملة دون تشويه) */
-.scene-background::before {
-    content: '';
+/* تنسيق فيديو الخلفية ليملأ الشاشة بشكل متناسق ومثالي دون تشويه */
+.bg-video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('assets/images/snow.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
     z-index: 1;
 }
 
-/* حاوية الكتاب: تعتمد على نظام النسبة المئوية لتموضع دقيق وثابت فوق أوراق الكتاب في الصورة */
+/* حاوية الكتاب فوق الفيديو بدقة تامة */
 .magic-book-overlay {
     width: 68vw;
     max-width: 580px;
@@ -51,7 +49,7 @@ html, body {
     top: 61.5%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2; /* لتكون فوق الخلفية مباشرة وتستقبل التفاعل */
+    z-index: 2; /* ليكون فوق الفيديو تماماً وقابلاً للتفاعل */
 }
 
 /* حاوية الصفحة الواحدة */
@@ -63,7 +61,7 @@ html, body {
     flex-direction: column;
 }
 
-/* صندوق التمرير: مرن جداً ويسمح بالسحب للأعلى والأسفل بسلاسة تامة */
+/* صندوق التمرير للنص (صعود وهبوط بمرونة تامة بالأصبع) */
 .page-scroll-box {
     width: 100%;
     height: 100%;
@@ -74,7 +72,7 @@ html, body {
     scrollbar-width: thin;
 }
 
-/* تخصيص مظهر شريط التمرير */
+/* تخصيص شريط التمرير */
 .page-scroll-box::-webkit-scrollbar {
     width: 4px;
 }
@@ -104,7 +102,7 @@ html, body {
     font-weight: 500;
 }
 
-/* التجاوب مع شاشات الهواتف المحمولة المختلفة */
+/* التجاوب مع شاشات الهواتف المحمولة */
 @media (max-width: 768px) {
     .magic-book-overlay {
         width: 80vw;
